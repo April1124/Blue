@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue - Young Kai </title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            width: 100%;
+            height: 100%;
+        }
+        .heart {
+            position: absolute;
+            top: 30%;
+            left: 45%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 300px;
+            height: 300px;
+            font-size: 300px;
+           
+            animation: beat 1s infinite alternate;
+        }
+        @keyframes beat {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            100% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+        #lyrics {
+            position: absolute;
+            bottom: 100px;
+            width: 100%;
+            font-size: 24px;
+            overflow: hidden;
+        }
+        #song {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        h1{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FOR MY HEART</h1>
+    <div class="heart" > ❤️ </div>
+    <p id="lyrics">Loading lyrics...</p>
+    <audio id="song" controls>
+        <source src="F:/Work/CODE/blue.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        const lyrics = {
+            19: "Your morning eyes, I could stare like watching stars",
+            26: "I could walk you by, and I'll tell without a thought",
+            33: "You'd be mine, would you mind if I took your hand tonight?",
+            40: "Know you're all that I want this life",
+            48: "I'll imagine we fell in love",
+            51: "I'll nap under moonlight skies with you",
+            55: "I think I'll picture us, you with the waves",
+            58: "The ocean's colors on your face",
+            62: "I'll leave my heart with your air",
+            66: "So let me fly with you",
+            69: "Will you be forever with me?",
+            74: ".......♪........",
+            107: "My love will always stay by you",
+            113: "I'll keep it safe, so don't you worry a thing",
+            118: "I'll tell you I love you more",
+            122: "It's stuck with you forever, so promise you won't let it go",
+            128: "I'll trust the universe will always bring me to you",
+            137: "I'll imagine we fell in love",
+            139: "I'll nap under moonlight skies with you",
+            143: "I think I'll picture us, you with the waves",
+            147: "The ocean's colors on your face",
+            150: "I'll leave my heart with your air",
+            155: "So let me fly with you",
+            158: "Will you be forever with me?",
+            163: ".......♪........ "
+        };
+
+        const song = document.getElementById("song");
+        const lyricsElement = document.getElementById("lyrics");
+
+        function updateLyrics() {
+            let currentTime = Math.floor(song.currentTime);
+            let latestLyric = "";
+            for (const [time, lyric] of Object.entries(lyrics)) {
+                if (currentTime >= time) {
+                    latestLyric = lyric;
+                }
+            }
+            lyricsElement.textContent = latestLyric;
+        }
+
+        song.addEventListener("timeupdate", updateLyrics);
+        song.play().catch(error => console.log("Autoplay prevented: " + error));
+    </script>
+</body>
+</html>
